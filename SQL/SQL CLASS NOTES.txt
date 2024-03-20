@@ -1,0 +1,310 @@
+[3:37 PM] Shreyansh Kumar
+create TABLE EMPLOYEE(
+
+    no tinyint, 
+
+    name varchar(20), 
+
+    number tinyint
+ 
+);
+ 
+-- INSERT into EMPLOYEE VALUES(1, 'shreyansh', 100);
+
+-- INSERT into EMPLOYEE VALUES(2, 'Aditya', 99);
+
+-- INSERT into EMPLOYEE VALUES(3, 'Akash', 98);
+
+-- INSERT into EMPLOYEE VALUES(4, 'subham', 97);
+
+-- INSERT into EMPLOYEE VALUES(5, 'ritik', 96);
+
+-- INSERT into EMPLOYEE VALUES(6, 'ankit', 97);
+
+-- INSERT into EMPLOYEE VALUES(7, 'sankalp', 96);
+
+-- INSERT into EMPLOYEE (no, name) VALUES(3, 'dfg');
+ 
+INSERT into EMPLOYEE VALUES(1, 'shreyansh', 93),
+
+(10, 'aakash', 89), 
+
+(2, 'Aditya pradhan', 89), 
+
+(3, 'Akash', 90), 
+
+(4, 'subham', 97), 
+
+(5, 'ritik', 96), 
+
+(6, 'ankit', 97), 
+
+(7, 'sankalp', 96);
+ 
+INSERT into EMPLOYEE (no, name)VALUES(9, 'sanya');
+
+-- SELECT no, name FROM EMPLOYEE;
+
+-- SELECT * FROM EMPLOYEE;
+ 
+  --         ------------------------ basic comparision operator--------------------------
+
+-- select * from EMPLOYEE where number = 90;
+
+-- select * from EMPLOYEE where number != 90;
+
+-- select * from EMPLOYEE where number < 90;
+
+-- select * from EMPLOYEE where number > 90;
+
+-- select * from EMPLOYEE where number >= 90;
+
+-- select * from EMPLOYEE where number <= 90;
+
+-- select * from EMPLOYEE where number between 91 and 94;
+
+-- select * from EMPLOYEE where number not between 91 and 94;
+
+-- select * from EMPLOYEE where number in(90, 89, 97);
+
+-- select * from EMPLOYEE where number not in(90, 89, 78);
+ 
+-- ------------want to get those column where marks is equal to null
+
+-- select * from EMPLOYEE where number is null;
+
+-- select * from EMPLOYEE where number is not null;
+ 
+-- ----------wild cards(LIKE)------------------- % 0 or more character--
+
+-- select * from EMPLOYEE where name LIKE 'sh%'; 
+
+-- select * from EMPLOYEE where name LIKE '%'; 
+
+-- select * from EMPLOYEE where name LIKE 'a%kash';
+ 
+-- underscore only one-----
+
+  -- select * from EMPLOYEE where name LIKE 'a_kash';
+ 
+-- third one is adding square bracket
+ 
+-- doubt
+
+-- select * from EMPLOYEE where name LIKE 's[h]reyansh';
+
+-- select * from EMPLOYEE where name LIKE 'a[^ayz]kash' ; -- which one character we dont want and there will be atleat one character
+ 
+ 
+-- ---------------Logical operator--------------
+
+-- select * from EMPLOYEE where name LIKE 's%h' and number > 92; 
+
+-- select * from EMPLOYEE where name like 'a%' or number >90;
+ 
+select * from EMPLOYEE where not number >90; -- used to compare only one column other two uses 2 comparesion
+ 
+ 
+ 
+ 
+ 
+6-2-2024
+=========================
+/*
+-- FORGEIN KEY AND PRIMARY KEY
+-- CREATING TWO DIFFERENT TABLES
+
+-- create
+CREATE TABLE EMPLOYEE (Rollno Tinyint PRIMARY KEY, name varchar(20) NOT NULL);
+
+-- insert
+INSERT INTO EMPLOYEE VALUES (1, 'Clark');
+INSERT INTO EMPLOYEE VALUES (2, 'Dave');
+INSERT INTO EMPLOYEE VALUES (3, 'Ava');
+
+*/
+-- fetch 
+
+/*
+select * from EMPLOYEE;
+
+CREATE TABLE sales(Rollno Tinyint, item varchar(20),price int, foreign KEY(Rollno) references EMPLOYEE(Rollno));
+
+INSERT INTO sales VALUES (1, 'idli',30);
+
+select * from sales;
+*/
+
+
+-- ----------------------------------------------
+
+/*
+
+-- IMPLEMENTING FK AND PK AND SAW IF WE DELETE IN PARENT  .IT SHOULD UPATE IN CHILD AS WELL , TO DEAL WITH THAT WE USE ON DELETE CASCADE
+CREATE TABLE EMPLOYEE1 (Rollno Tinyint PRIMARY KEY, name varchar(20) NOT NULL);
+
+-- insert
+INSERT INTO EMPLOYEE1 VALUES (1, 'Clark');
+INSERT INTO EMPLOYEE1 VALUES (2, 'Dave');
+INSERT INTO EMPLOYEE1 VALUES (3, 'Ava');
+
+
+
+CREATE TABLE sales1(Rollno Tinyint, item varchar(20),price int, foreign KEY(Rollno) references EMPLOYEE1(Rollno) on delete cascade);
+
+INSERT INTO sales1 VALUES (1, 'idli',30);
+INSERT INTO sales1 VALUES (2, 'dosa',60);
+
+
+
+delete from EMPLOYEE1 where Rollno=1;
+
+
+select * from EMPLOYEE1;
+
+select * from sales1;
+
+
+*/
+
+/*
+-- SAME GOES WITH UPDATE , WE USE ON DELTE cascade AND ON UPDATE CASCADE.
+
+CREATE TABLE EMPLOYEE1 (Rollno Tinyint PRIMARY KEY, name varchar(20) NOT NULL);
+
+-- insert
+INSERT INTO EMPLOYEE1 VALUES (1, 'Clark');
+INSERT INTO EMPLOYEE1 VALUES (2, 'Dave');
+INSERT INTO EMPLOYEE1 VALUES (3, 'Ava');
+
+
+
+CREATE TABLE sales1(Rollno Tinyint, item varchar(20),price int, foreign KEY(Rollno) references EMPLOYEE1(Rollno) on delete cascade on Update cascade);
+
+INSERT INTO sales1 VALUES (1, 'idli',30);
+INSERT INTO sales1 VALUES (2, 'dosa',60);
+
+
+
+Update EMPLOYEE1 set Rollno=111 where Rollno=2;;
+
+
+select * from EMPLOYEE1;
+
+select * from sales1;
+
+
+*/
+
+-- Altering and adding FK
+CREATE TABLE EMPLOYEE1 (Rollno Tinyint PRIMARY KEY, name varchar(20) NOT NULL);
+
+-- insert
+INSERT INTO EMPLOYEE1 VALUES (1, 'Clark');
+INSERT INTO EMPLOYEE1 VALUES (2, 'Dave');
+INSERT INTO EMPLOYEE1 VALUES (3, 'Ava');
+
+
+
+CREATE TABLE sales1(Rollno Tinyint, item varchar(20),price int);
+
+INSERT INTO sales1 VALUES (1, 'idli',30);
+INSERT INTO sales1 VALUES (2, 'dosa',60);
+
+Alter table sales1 add foreign KEY(Rollno) references EMPLOYEE1(Rollno) on delete cascade on Update cascade;
+
+
+Update EMPLOYEE1 set Rollno=112 where Rollno=2;;
+
+
+select * from EMPLOYEE1;
+
+select * from sales1;
+
+
+================================================================================================
+
+FUNCTIONS
+---------
+
+-- Predefined Functions
+-------------------------
+
+-- Create testDb;
+-- use testDb;
+
+CREATE TABLE PERFORMANCE(RollNo tinyint, Name Varchar(20),Marks float);
+
+Insert into PERFORMANCE values(1,'Akash',10.5);
+Insert into PERFORMANCE values(2,'Smit',23.5);
+Insert into PERFORMANCE values(3,'Aditya',24.1);
+Insert into PERFORMANCE values(4,'Vikash',3.6);
+Insert into PERFORMANCE(RollNo,Name) values(5,'Deepika');
+
+select * from PERFORMANCE;
+
+select avg(Marks) as AverageMarks from PERFORMANCE;
+select sum(Marks) as ToalMarks from PERFORMANCE;
+select min(Marks) as MinimumMarks from PERFORMANCE;
+select max(Marks) as MaximumMarks from PERFORMANCE;
+select count(Marks) as countOFMarks from PERFORMANCE;
+select Marks,round(Marks,0) as RoundOffMarks from PERFORMANCE;
+select Marks,floor(Marks) as floorMarks from PERFORMANCE;
+select Marks,ceiling(Marks) as ceilMarks from PERFORMANCE;
+
+Insert into PERFORMANCE values(6,'Kohli',-18.5);
+select * from PERFORMANCE;
+
+select Marks,ABS(Marks) as absMarks from PERFORMANCE;
+
+----------------------------------------------------------------------------------------------------------------
+CREATE TABLE employeeRecord(
+RollNoo int primary key,
+Name varchar(20),
+BirthDate DATE,
+HireDate DATE,
+LastReviewDate DATETIME
+);
+
+
+Insert into employeeRecord values
+(1,'Aditya','2001-11-29','2010-10-24','2023-01-10 9:00:00'),
+(2,'Shiv','1999-03-29','2015-07-07','2023-01-31 11:45:00'),
+(3,'Ravi','1995-10-20','2011-11-25','2023-01-09 10:30:00');
+
+select * from employeeRecord;
+
+select name,getdate() as date from employeeRecord;
+
+select Name,HireDate, dateadd(month,5,HireDate) as Addedate from employeeRecord;
+
+select Name,HireDate, datediff(year,HireDate,getdate()) as working_years from employeeRecord;
+
+select name,HireDate,DATEPART(month,HireDate) as month_Hired from employeeRecord;
+
+
+
+---------------------------------------------------------------------------------------------------------------------
+STRING
+========
+-- create
+CREATE TABLE sample (
+  Rollno tinyint,
+  name varchar(20),
+  comment varchar(20)
+);
+
+Insert into sample values
+(1,'Aditya','Helloo'),
+(2,'Sahil','SQL Server'),
+(3,'Raju','String Fun'),
+(4,'Mohit','Java');
+
+select * from sample;
+
+select comment,LEN(comment) as comment_Len from sample;
+select comment,UPPER(comment) as upperletter from sample;
+select comment,LOWER(comment) as lowerletter from sample;
+select replace(comment,'Server','data') from sample;
+select comment,substring(comment,3,5) from sample;
+
